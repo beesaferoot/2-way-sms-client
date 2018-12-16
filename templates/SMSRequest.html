@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Messages {% endblock title %}</title>
+</head>
+<body>
+    {% block content %}
+        <h1>From:</h1>
+        {% for Client in Clients %}
+            <p>{{ Client }}</p>
+            {% for stats in Status %}
+                <p>Status : {{ stats.status }}</p>
+            {% endfor %}
+        {% endfor %}
+
+    {% endblock content %}
+</body>
+</html>
