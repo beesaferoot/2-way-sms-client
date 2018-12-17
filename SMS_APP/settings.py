@@ -132,5 +132,7 @@ STATIC_URL = '/static/'
 django_heroku.settings(locals())
 
 
-
+# config 
+APPEND_SLASH = False
+ 
 
