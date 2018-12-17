@@ -1,1 +1,1 @@
-web: gunicorn SMS_APP.wsgi 
+web: gunicorn SMS_APP:app
