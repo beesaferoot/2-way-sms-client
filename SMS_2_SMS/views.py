@@ -20,7 +20,7 @@ class SMSRequest(View):
     def fetch_sms_sync(self):
 
         try:
-            last_received_id = 0;
+            last_received_id = 0
             while True:
                 MessageData = self.sms.fetch_messages(last_received_id)
                 # messages = MessageData['SMSMessageData']['Messages']
