@@ -43,7 +43,8 @@ class SMSRequest(View):
 
     def get(self, request):
         return  HttpResponseBadRequest("<h1> Bad Request </h1>", status=400)
-
+    
+    @csrf_protect
     def post(self, request):
         # Get Request
         try:
