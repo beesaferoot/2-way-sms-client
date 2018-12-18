@@ -2,10 +2,13 @@ from django.shortcuts import render
 from django.views import  View
 from django.views.generic import  TemplateView
 from django.http import HttpResponseBadRequest, Http404
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 import africastalking
 
+
+@method_decorator(csrf_exempt, name='dispatch')
 class SMSRequest(View):
     def __init__(self):
         super(SMSRequest, self).__init__()
@@ -44,7 +47,7 @@ class SMSRequest(View):
     def get(self, request):
         return  HttpResponseBadRequest("<h1> Bad Request </h1>", status=400)
     
-    @csrf_protect
+  
     def post(self, request):
         # Get Request
         try:
@@ -56,3 +59,7 @@ class SMSRequest(View):
             return render(request, template_name="SMSRequest.html", context=context)
         except:
             return HttpResponseBadRequest("<h1> Bad Request </h1>", status=400)
+
+    
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
