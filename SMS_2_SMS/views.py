@@ -16,7 +16,7 @@ class SMSRequest(View):
         self.api_key = "2dac6c9b338e9f9c5616ae6285e1d7b105a929995ce4999c39fb6221357f9d89"
         africastalking.initialize(self.username, self.api_key)
         self.sms = africastalking.SMS
-        self.clients = None
+        self.clients = []
         self.shortCode = 30036
 
 
