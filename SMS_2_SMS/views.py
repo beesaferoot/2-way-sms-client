@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import  View
 from django.views.generic import  TemplateView
 from django.http import HttpResponseBadRequest, Http404
-
+from django.views.decorators.csrf import csrf_protect
 
 import africastalking
 
