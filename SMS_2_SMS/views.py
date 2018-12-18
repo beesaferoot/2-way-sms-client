@@ -13,11 +13,11 @@ class SMSRequest(View):
     def __init__(self):
         super(SMSRequest, self).__init__()
         self.username = "sandbox"
-        self.api_key = "2dac6c9b338e9f9c5616ae6285e1d7b105a929995ce4999c39fb6221357f9d89"
+        self.api_key = ""
         africastalking.initialize(self.username, self.api_key)
         self.sms = africastalking.SMS
         self.clients = []
-        self.shortCode = "30036"
+        self.shortCode = ""
 
 
     def fetch_sms_sync(self):
