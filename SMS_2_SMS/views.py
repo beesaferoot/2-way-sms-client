@@ -36,7 +36,7 @@ class SMSRequest(View):
         except Exception as e:
             print ('Encountered an error while fetching: %s' % str(e))
 
-    def send_sms_sender_id(self, recipients = None):
+    def send_sms_sender_id(self, recipients):
         message = "I'm a lumberjack and it's ok, I sleep all night and I work all day"
         sender = str(self.shortCode)
         try:
