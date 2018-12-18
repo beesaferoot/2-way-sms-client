@@ -28,8 +28,9 @@ class SMSRequest(View):
             MessageData = self.sms.fetch_messages(last_received_id)
             messages = MessageData['SMSMessageData']['Messages']
             # Get client Number
-            client = messages[5]
-            return  client
+            client = messages[0]["from"]
+            return client
+            
         except Exception as e:
             print ('Encountered an error while fetching: %s' % str(e))
 
