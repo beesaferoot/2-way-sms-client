@@ -27,7 +27,8 @@ class SMSRequest(View):
             while True:
                 MessageData = self.sms.fetch_messages(last_received_id)
                 messages = MessageData['SMSMessageData']['Messages']
-                client = messages['from']
+                # Get client Number
+                client = messages[5]
                 # if len(messages) == 0:
                 #     print ('No sms messages in your inbox.')
                 #     break
