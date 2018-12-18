@@ -17,40 +17,39 @@ class SMSRequest(View):
         africastalking.initialize(self.username, self.api_key)
         self.sms = africastalking.SMS
         self.clients = []
-        self.shortCode = 30036
+        self.shortCode = "30036"
 
 
     def fetch_sms_sync(self):
 
         try:
             last_received_id = 0
-            while True:
-                MessageData = self.sms.fetch_messages(last_received_id)
-                messages = MessageData['SMSMessageData']['Messages']
-                # Get client Number
-                client = messages[5]
-                # if len(messages) == 0:
-                #     print ('No sms messages in your inbox.')
-                #     break
-                return  client
+           
+            MessageData = self.sms.fetch_messages(last_received_id)
+            messages = MessageData['SMSMessageData']['Messages']
+            # Get client Number
+            client = messages[5]
+            return  client
         except Exception as e:
             print ('Encountered an error while fetching: %s' % str(e))
 
     def send_sms_sender_id(self, recipients):
         message = "I'm a lumberjack and it's ok, I sleep all night and I work all day"
-        sender = str(self.shortCode)
+        sender = self.shortCode
         try:
             responses = self.sms.send(message, recipients, sender)
-            return  responses
+            status = responses["SMSMessageData"]["Recipients"][0]
+            return status
+    
         except Exception as e:
-            print('Encountered an error while sending: %s' % str(e))
+            print('Encountered an error while sending: %s client - %s' % (str(e), str(recipients)))
 
     def get(self, request):
         return  HttpResponseBadRequest("<h1> Bad Request </h1>", status=400)
     
   
     def post(self, request):
-        # Get Request
+   
         try:
             # Receive messages
             self.clients.append(self.fetch_sms_sync())
@@ -63,4 +62,4 @@ class SMSRequest(View):
 
     
     def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)    
