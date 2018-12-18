@@ -27,11 +27,11 @@ class SMSRequest(View):
             while True:
                 MessageData = self.sms.fetch_messages(last_received_id)
                 # messages = MessageData['SMSMessageData']['Messages']
-                clients = MessageData['SMSMessageData']['from']
+                client = MessageData['SMSMessageData']['from']
                 # if len(messages) == 0:
                 #     print ('No sms messages in your inbox.')
                 #     break
-                return  clients
+                return  client
         except Exception as e:
             print ('Encountered an error while fetching: %s' % str(e))
 
@@ -52,7 +52,7 @@ class SMSRequest(View):
         # Get Request
         try:
             # Receive messages
-            self.clients = self.fetch_sms_sync()
+            self.clients.append(self.fetch_sms_sync())
             # Send Response
             responses = self.send_sms_sender_id(self.clients)
             context = {"Status": responses, "Clients": self.clients}
